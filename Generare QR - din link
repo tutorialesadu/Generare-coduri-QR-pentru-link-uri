@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <title>QR Generator (QuickChart) - Funcționează 100%</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{font-family:Arial, sans-serif; background:#f2f2f2; padding:30px; display:flex; justify-content:center}
+    .card{background:#fff; padding:25px; width:420px; border-radius:14px; box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+    h2{text-align:center; margin-bottom:15px}
+    input{width:100%; padding:12px; border-radius:8px; border:1px solid #ccc; margin-bottom:12px}
+    button{padding:12px 18px; background:#0066ff; color:white; border:none; border-radius:8px; cursor:pointer; width:100%; font-size:16px}
+    button:hover{background:#004bb8}
+    .qr-area{text-align:center; margin-top:20px}
+    img{margin-top:10px}
+    a{display:inline-block; padding:10px 16px; border-radius:8px; border:1px solid #1aaf77; color:#1aaf77; text-decoration:none; margin-top:10px}
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Generator Cod QR </h2>
+    <input id="url" placeholder="Introdu linkul (ex: https://youtube.com)" />
+    <button onclick="gen()">Generează QR</button>
+
+    <div class="qr-area" id="area" style="display:none">
+      <img id="qr" width="300" alt="QR Code" />
+      <br>
+      <a id="dl" download="qrcode.png">Descarcă imaginea</a>
+    </div>
+  </div>
+
+<script>
+function gen(){
+  const u = document.getElementById('url').value.trim();
+  if(!u){ alert('Te rog introdu un link.'); return; }
+  const encoded = encodeURIComponent(u);
+  const src = `https://quickchart.io/qr?text=${encoded}&size=300`;
+  document.getElementById('qr').src = src;
+  document.getElementById('dl').href = src;
+  document.getElementById('area').style.display = 'block';
+}
+</script>
+
+</body>
+</html>
